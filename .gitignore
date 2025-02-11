@@ -1,0 +1,44 @@
+# Build Folders
+bin/
+obj/
+
+# User-Specific Files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+logs/
+*.log
+
+# Environment and Configuration
+.env
+secrets.json
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet Packages
+*.nupkg
+packages/
+project.lock.json
+project.assets.json
+
+# Node.js Dependencies (if any)
+node_modules/
+npm-debug.log
+yarn.lock
+
+# ASP.NET Core Hosting
+wwwroot/
+
+# Temporary files
+temp/
+*.tmp
