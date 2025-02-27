@@ -1,6 +1,17 @@
+using MVCWebApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+// Load configuration
+var configuration = builder.Configuration;
+
+
 
 // Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<MongoDbService>();
+
+// builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDB"));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -24,6 +35,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "user",
+    pattern: "{controller=User}/{action=Create}/{id?}"
+);
 
 
 app.Run();

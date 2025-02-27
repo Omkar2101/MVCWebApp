@@ -13,11 +13,26 @@ namespace MVCWebApp.Controllers
         private readonly IMongoCollection<VisitorEntry> _visitorCollection;
 
         public HomeController(IConfiguration config)
-        {
-            var client = new MongoClient(config["MongoDB:ConnectionString"]);
-            var database = client.GetDatabase(config["MongoDB:DatabaseName"]);
-            _visitorCollection = database.GetCollection<VisitorEntry>(config["MongoDB:CollectionName"]);
-        }
+{
+    var visitorConnectionString = config.GetValue<string>("MongoDB:VisitorDB:ConnectionString");
+    var visitorDatabaseName = config.GetValue<string>("MongoDB:VisitorDB:DatabaseName");
+    var visitorCollectionName = config.GetValue<string>("MongoDB:VisitorDB:VisitorCollectionName");
+
+    if (string.IsNullOrEmpty(visitorConnectionString))
+        throw new ArgumentNullException(nameof(visitorConnectionString), "VisitorDB Connection String is missing in appsettings.json");
+
+    if (string.IsNullOrEmpty(visitorDatabaseName))
+        throw new ArgumentNullException(nameof(visitorDatabaseName), "VisitorDB Database Name is missing in appsettings.json");
+
+    if (string.IsNullOrEmpty(visitorCollectionName))
+        throw new ArgumentNullException(nameof(visitorCollectionName), "VisitorDB Collection Name is missing in appsettings.json");
+
+    var client = new MongoClient(visitorConnectionString);
+    var database = client.GetDatabase(visitorDatabaseName);
+    _visitorCollection = database.GetCollection<VisitorEntry>(visitorCollectionName);
+}
+
+        
 
        
 
